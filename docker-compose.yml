@@ -1,0 +1,31 @@
+services:
+  aave-v3-indexer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      CLICKHOUSE_URL: http://clickhouse:8123
+      CLICKHOUSE_DATABASE: pipes
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_PASSWORD: password
+    command: ["sh", "-lc", "node dist/index.js"]
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+    restart: unless-stopped
+    profiles: ["with-pipeline"]
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    ports:
+      - "8123:8123"
+    environment:
+      CLICKHOUSE_DB: pipes
+      CLICKHOUSE_USER: default
+      CLICKHOUSE_PASSWORD: password
+    healthcheck:
+      test: ["CMD", "clickhouse-client", "--query", "SELECT 1"]
+      interval: 3s
+      timeout: 5s
+      retries: 5
+
