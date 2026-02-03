@@ -10,7 +10,8 @@ This indexer tracks Aave V3 USDC deposits and withdrawals on Ethereum mainnet, p
 - Cumulative USDC deposits over time
 - Daily mint/burn volumes
 
-![USDC Deposits Mints & Burns](./chart-screenshot.png)
+<img width="2968" height="1612" alt="Screenshot 2026-02-03@2x" src="https://github.com/user-attachments/assets/8eb6b62f-36aa-401f-87f3-0c9e35f00899" />
+
 
 ## Data Metrics
 
